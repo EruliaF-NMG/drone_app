@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGODB_DATABASE_NAME}
+    env_file:
+      - ./.env
+    volumes:
+      - mongo:/data/db
+    ports:
+      - '27017:27017'
+  drone-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mongo
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - NODE_PORT=${NODE_PORT}
+    ports:
+      - ${NODE_PORT}:${NODE_PORT}
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: "npm run serve"
+volumes:
+  mongo:
