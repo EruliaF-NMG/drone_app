@@ -31,7 +31,9 @@ export type CustomValidationMessage = {
 }
 
 export interface CustomRequest<T> extends Request {
-    body: T
+    body: T,
+    params: any,
+    query: any
 }
 
 export interface ValidateObjectMetaData {

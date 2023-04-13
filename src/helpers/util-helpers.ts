@@ -1,6 +1,7 @@
 import _ from "lodash";
 import { CustomResponse } from "../config/api-response.config";
 import { errorMessageList } from "../config/app.config";
+import { DroneModels, DroneWeightLimits } from "../config/core.enum";
 
 /**
  * Check value is empty
@@ -149,4 +150,61 @@ export const generateResponse = (commonResponse :CustomResponse = <CustomRespons
     data,
   };
   return response;
+};
+
+/**
+ * @author Nisal Madusanka(EruliaF)
+ * @description get from inputs for form validation
+ * @param {Object|Array} formValue form data list
+ * @param {string} key form value key
+ */
+export const getInputsForValidate = (formValue:any, key:any) => {
+  let value = getValue(formValue, key, '');
+
+  switch (typeof value) {
+    case 'string': {
+      value = value.trim();
+      break;
+    }
+    default: {
+      break;
+    }
+  }
+  return value;
+};
+
+/**
+* @author Nisal Madusanka(EruliaF)
+* @description genarate map key for form validation
+* @param {string} realInputKey known key
+* @param {string} keyToMap key should find
+*/
+export const mapInputKey = (realInputKey:string, keyToMap:string) => {
+  const arrayMatch = realInputKey.match(/(\.\d*\.)/g);
+  let key = 0;
+  const returnData = keyToMap.replace(/(\.\**\.)/g, () => {
+    const value = arrayMatch[key];
+    key += 1;
+    return value;
+  });
+  return returnData;
+};
+
+/**
+* @author Nisal Madusanka(EruliaF)
+* @description genarate map key for form validation
+* @param {string} realInputKey known key
+* @param {string} keyToMap key should find
+*/
+export const getDroneWeightLimit = (key:string):Number => {
+  switch(key){
+    case DroneModels.Cruiserweight:
+      return DroneWeightLimits.Cruiserweight
+    case DroneModels.Heavyweight:
+      return DroneWeightLimits.Heavyweight
+    case DroneModels.Lightweight:
+        return DroneWeightLimits.Lightweight
+    case DroneModels.Middleweight:
+        return DroneWeightLimits.Middleweight
+  }
 };

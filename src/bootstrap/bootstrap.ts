@@ -6,6 +6,7 @@ import { ControllerInstance, Provider, RouteDefinitionInterface, ValidateObjectM
 import { getValue, isEmpty } from '../helpers/util-helpers';
 import iocContainer from './ioc-container';
 import { ModuleProperties } from '../config/core.enum';
+import { validateRequest } from '../core/middleware/validator.middleware';
 
 class Bootstrap {
 
@@ -92,9 +93,11 @@ class Bootstrap {
 
                const param : any = [];
 
+               if( validateProperties.hasOwnProperty(methodName) ) param.push(validateRequest(getValue(validateProperties,methodName,{})));
+
                param.push(controllerInstance[methodName].bind(controllerInstance));
 
-                this._instance.route(`${prefix}${path}`)[method](...param);
+               this._instance.route(`${prefix}${path}`)[method](...param);
             });
         });
     }
