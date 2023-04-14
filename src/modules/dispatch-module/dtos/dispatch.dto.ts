@@ -6,12 +6,12 @@ import { InputField } from "../../../core/decorators/validate.decorator";
 export class DispatchDTO {
 
     @DisplayName('Drone ID')
-    @Rules('required')
+    @Rules('required|exists:drones,_id')
     @InputField()
     public drone_reference: string;
 
     @DisplayName('Medication ID')
-    @Rules(`required`)
+    @Rules(`required|exists:medications,_id`)
     @InputField()
     public medication_reference: string;
 

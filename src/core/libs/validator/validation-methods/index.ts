@@ -1,5 +1,5 @@
 import { required, requiredIf, max, min,numeric, maxAmount,valueIn,regex  } from './core-methods';
 
-import { unique } from './core-dbmethods';
+import { unique,exists } from './core-dbmethods';
 
-export { required, requiredIf, max, min,numeric, maxAmount, unique,valueIn,regex };
+export { required, requiredIf, max, min,numeric, maxAmount, unique,valueIn,regex,exists };

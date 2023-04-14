@@ -14,6 +14,7 @@ const errorMessageList :any = {
     numeric: 'The :attribute must be a number.',
     valueIn: 'Please :attribute should in [:in].',
     regex: ':attribute value not in the right format.',
+    exists: 'The :attribute value is not available in the database',
 };
 
 export {
