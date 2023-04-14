@@ -7,6 +7,11 @@ export enum ModuleProperties {
     Prefix       = "prefix",
 }
 
+export enum MiddlewareProperties {
+    ValidateProperties   = "ValidateProperties",
+    FileUploadProperties = "FileUploadProperties"
+}
+
 export enum HTTPMethods {
     Get   = "get",
     Post  = "post",

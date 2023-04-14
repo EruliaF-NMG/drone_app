@@ -5,8 +5,9 @@ import MainServiceProvilder from '../main.module';
 import { ControllerInstance, Provider, RouteDefinitionInterface, ValidateObjectMetaData } from '../core/types/type.interface';
 import { getValue, isEmpty } from '../helpers/util-helpers';
 import iocContainer from './ioc-container';
-import { ModuleProperties } from '../config/core.enum';
+import { MiddlewareProperties, ModuleProperties } from '../config/core.enum';
 import { validateRequest } from '../core/middleware/validator.middleware';
+import { fileUpload } from '../core/middleware/file-upload.middleware';
 
 class Bootstrap {
 
@@ -88,11 +89,13 @@ class Bootstrap {
             const prefix: string                           = Reflect.getMetadata(ModuleProperties.Prefix, controller);
             const routers: Array<RouteDefinitionInterface> = Reflect.getMetadata(ModuleProperties.Routes, controller);
             const validateProperties: Map<string,ValidateObjectMetaData> = Reflect.getMetadata('validate_properties', controller) || {};
+            const fileUploadProperties: Map<string,ValidateObjectMetaData> = Reflect.getMetadata(MiddlewareProperties.FileUploadProperties, controller) || {};
            
             routers.forEach(({ method, path, methodName }) => {
 
                const param : any = [];
 
+               if( fileUploadProperties.hasOwnProperty(methodName) ) param.push(fileUpload.single(getValue(fileUploadProperties,methodName,"")));
                if( validateProperties.hasOwnProperty(methodName) ) param.push(validateRequest(getValue(validateProperties,methodName,{})));
 
                param.push(controllerInstance[methodName].bind(controllerInstance));

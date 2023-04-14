@@ -190,10 +190,8 @@ const valueIn = (key:string, values:any, param:any, message:string, filedList:an
         if ( param && param.includes(formValue) ) {
           cb(null, true);
         } else {
-          console.log("============",message);
           let newMessage = message;
           newMessage = newMessage.replace(':in', param.toString());
-          console.log("============",newMessage);
           cb(newMessage);
         }
     }
@@ -207,5 +205,28 @@ const valueIn = (key:string, values:any, param:any, message:string, filedList:an
   }
 }
 
+const regex = (key:string, values:any, param:any, message:string, filedList:any,additionalParam:any, cb:Function) => {
+  try {
+    let formValue = getInputsForValidate(values, key);
+    if(!param[0] || !formValue) {
+      cb(null, true);
+    } else {
+        const regex = new RegExp(param[0]);
+        if ( formValue.match(regex) ) {
+          cb(null, true);
+        } else {
+          cb(message);
+        }
+    }
+  } catch (ex) {
+    console.log(
+      `----------------Validation Exception At (regex)-------------------`,
+      `Input Key - ${key}`,
+      `Exception - ${ex}`
+    );
+    cb(true);
+  }
+}
 
-export { required, requiredIf, max, min, numeric, maxAmount, valueIn };
+
+export { required, requiredIf, max, min, numeric, maxAmount, valueIn, regex };

@@ -7,6 +7,7 @@ import CoreService from "./service/core-service";
 import { Column } from "./decorators/db.decorator";
 import { ICoreEntity } from "./interfaces/core-entity.interface";
 import { DisplayName, Message, Rules, Validate, ValidateBodyRequest } from "./decorators/validate.decorator";
+import { FileUpload } from "./decorators/file-upload.decorator";
 
 export {
     Controller,
@@ -24,5 +25,6 @@ export {
     Message,
     Rules,
     Validate,
-    ValidateBodyRequest
+    ValidateBodyRequest,
+    FileUpload
 }

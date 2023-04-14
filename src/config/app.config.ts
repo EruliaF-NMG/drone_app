@@ -12,7 +12,8 @@ const errorMessageList :any = {
     min: 'The :attribute must be at least :min.',
     maxAmount: 'The :attribute may not be greater than :max.',
     numeric: 'The :attribute must be a number.',
-    valueIn: 'Please :attribute should in [:in]',
+    valueIn: 'Please :attribute should in [:in].',
+    regex: ':attribute value not in the right format.',
 };
 
 export {
