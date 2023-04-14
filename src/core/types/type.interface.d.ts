@@ -43,3 +43,9 @@ export interface ValidateObjectMetaData {
     fields?: Map<string,string>;
     useClass: Class;
 }
+
+export type DBReturnStatus<T> = {
+    status:boolean,
+    message:string,
+    returnObject:T|null
+}

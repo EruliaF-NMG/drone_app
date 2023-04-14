@@ -25,6 +25,10 @@ class MongooseWrapper {
         return this.createSchema<T>(object.injections)
     }
 
+    public getConnection(): mongoose.Connection {
+        return mongoose.connection;
+    }
+
 }
 
 export default new MongooseWrapper();

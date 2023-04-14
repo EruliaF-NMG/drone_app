@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { exceptionOccurredResponse, failedPostResponse, successGetResponse, successPostResponse } from "../../../config/api-response.config";
+import { DroneStates } from "../../../config/core.enum";
 import { Controller, Get, Inject, Injectable, Post, Put, ValidateBodyRequest } from "../../../core";
 import mongooseWrapper from "../../../core/wrappers/mongoose.wrapper";
 import { generateErrorResponse, generateResponse, getDroneWeightLimit } from "../../../helpers/util-helpers";
@@ -20,21 +21,51 @@ export default class DroneController {
     @Get()
     async getAll(request: Request, response: Response) {
         try{
-            const drons = await this._droneService.find();
+            const drones = await this._droneService.find();
             return response.status(successGetResponse.httpStatus)
-                .json(generateResponse(successGetResponse,drons));
+                .json(generateResponse(successGetResponse,drones));
         } catch(ex){
             return response.status(exceptionOccurredResponse.httpStatus)
                 .json(generateErrorResponse(exceptionOccurredResponse,ex,'Failed get drone type list'));
         }
     }
 
+    @Get("/with-free-space")
+    async getDroneWithFreeSpace(request: Request, response: Response) {
+        try{
+            const drones = await this._droneService.find({
+                state: {
+                    $in: [ DroneStates.IDLE, DroneStates.LOADING ]
+                }
+            });
+            return response.status(successGetResponse.httpStatus)
+                .json(generateResponse(successGetResponse,drones));
+        } catch(ex){
+            return response.status(exceptionOccurredResponse.httpStatus)
+                .json(generateErrorResponse(exceptionOccurredResponse,ex,'Failed to get drone list'));
+        }
+    }
+
+    @Get("/battery-capacity/:droneID")
+    async getDroneBatteryCapacity(request: Request, response: Response) {
+        try{
+            const drone = await this._droneService.findByID(request.params.droneID);
+            return response.status(successGetResponse.httpStatus)
+                .json(generateResponse(successGetResponse,{
+                    battery_capacity : drone.battery_capacity
+                }));
+        } catch(ex){
+            return response.status(exceptionOccurredResponse.httpStatus)
+                .json(generateErrorResponse(exceptionOccurredResponse,ex,'Failed to get drone list'));
+        }
+    }
+
     @Get("/:droneID")
     async getByID(request: Request, response: Response) {
         try{
-            const dron = await this._droneService.findByID(request.params.droneID);
+            const drone = await this._droneService.findByID(request.params.droneID);
             return response.status(successGetResponse.httpStatus)
-                .json(generateResponse(successGetResponse,dron));
+                .json(generateResponse(successGetResponse,drone));
         } catch(ex){
             return response.status(exceptionOccurredResponse.httpStatus)
                 .json(generateErrorResponse(exceptionOccurredResponse,ex,'Failed to get drone type'));
@@ -45,12 +76,12 @@ export default class DroneController {
     @ValidateBodyRequest(DroneDTO)
     async create(request: Request, response: Response) {
         try{
-            let dron = request.body as IDrone;
-            dron.weight_limit = getDroneWeightLimit(dron.model);
+            let drone = request.body as IDrone;
+            drone.weight_limit = getDroneWeightLimit(drone.model);
 
-            dron = await this._droneService.create(dron);
+            drone = await this._droneService.create(drone);
             return response.status(successPostResponse.httpStatus)
-                .json(generateResponse(successPostResponse,dron,'Drone type created successfully'));
+                .json(generateResponse(successPostResponse,drone,'Drone type created successfully'));
         } catch(ex){
             return response.status(failedPostResponse.httpStatus)
                 .json(generateErrorResponse(failedPostResponse,ex,'Failed to create drone type'));
@@ -62,11 +93,11 @@ export default class DroneController {
     async update(request: Request, response: Response) {
         try{
             const _id = mongooseWrapper.getObjectID(request.params.droneID);
-            let dron = request.body as IDrone;
-            dron.weight_limit = getDroneWeightLimit(dron.model);
-            dron = await this._droneService.update({_id},dron);
-            if(dron)  return response.status(successPostResponse.httpStatus)
-                            .json(generateResponse(successPostResponse,dron,'Drone type update successfully'));
+            let drone = request.body as IDrone;
+            drone.weight_limit = getDroneWeightLimit(drone.model);
+            drone = await this._droneService.update({_id},drone);
+            if(drone)  return response.status(successPostResponse.httpStatus)
+                            .json(generateResponse(successPostResponse,drone,'Drone type update successfully'));
             else      return response.status(failedPostResponse.httpStatus)
                             .json(generateErrorResponse(failedPostResponse,{},'Failed to update drone type'));                   
         } catch(ex){ 
