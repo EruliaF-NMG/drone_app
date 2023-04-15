@@ -6,7 +6,7 @@ import { InputField } from "../../../core/decorators/validate.decorator";
 export class DispatchDTO {
 
     @DisplayName('Drone ID')
-    @Rules('required|exists:drones,_id')
+    @Rules('required|exists:drones,_id|checkDroneIsReady:drones,_id')
     @InputField()
     public drone_reference: string;
 

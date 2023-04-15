@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import { exceptionOccurredResponse, failedPostResponse, successGetResponse, successPostResponse } from "../../../config/api-response.config";
-import { Controller, Get, Inject, Injectable, Post, Put, ValidateBodyRequest } from "../../../core";
+import { Controller, Get, Inject, Injectable, Post, ValidateBodyRequest } from "../../../core";
 import { DBReturnStatus } from "../../../core/types/type.interface";
-import mongooseWrapper from "../../../core/wrappers/mongoose.wrapper";
 import { generateErrorResponse, generateResponse, getDroneWeightLimit } from "../../../helpers/util-helpers";
 import { DispatchDTO } from "../dtos/dispatch.dto";
 

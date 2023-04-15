@@ -8,6 +8,7 @@ import { Column } from "./decorators/db.decorator";
 import { ICoreEntity } from "./interfaces/core-entity.interface";
 import { DisplayName, Message, Rules, Validate, ValidateBodyRequest } from "./decorators/validate.decorator";
 import { FileUpload } from "./decorators/file-upload.decorator";
+import { logger } from "./wrappers/logger.wrapper";
 
 export {
     Controller,
@@ -26,5 +27,6 @@ export {
     Rules,
     Validate,
     ValidateBodyRequest,
-    FileUpload
+    FileUpload,
+    logger
 }

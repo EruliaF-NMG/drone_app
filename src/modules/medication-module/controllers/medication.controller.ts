@@ -76,11 +76,13 @@ export default class MedicationController {
     }
 
     @Put("/:medicationsID")
+    @FileUpload('medication_image')
     @ValidateBodyRequest(MedicationDTO)
     async update(request: Request, response: Response) {
         try{
             const _id = mongooseWrapper.getObjectID(request.params.medicationsID);
             const medication = await this._medicationService.update({_id},request.body);
+            await gridFSWrapper.uploadImage(medication._id, request.file);
             if(medication)  return response.status(successPostResponse.httpStatus)
                             .json(generateResponse(successPostResponse,medication,'Medication update successfully'));
             else      return response.status(failedPostResponse.httpStatus)

@@ -4,6 +4,7 @@ import http from 'http';
 import { mongoUri, port } from "./config/app.config";
 import Bootstrap from "./bootstrap/bootstrap";
 import mongoose from 'mongoose';
+import './helpers/cron-runner-helpers';
 
 const server = http.createServer(Bootstrap.instance);
 

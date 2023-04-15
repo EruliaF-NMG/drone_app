@@ -56,7 +56,7 @@ export default class DroneController {
                 }));
         } catch(ex){
             return response.status(exceptionOccurredResponse.httpStatus)
-                .json(generateErrorResponse(exceptionOccurredResponse,ex,'Failed to get drone list'));
+                .json(generateErrorResponse(exceptionOccurredResponse,ex,'Failed to get battery capacity'));
         }
     }
 
@@ -68,7 +68,7 @@ export default class DroneController {
                 .json(generateResponse(successGetResponse,drone));
         } catch(ex){
             return response.status(exceptionOccurredResponse.httpStatus)
-                .json(generateErrorResponse(exceptionOccurredResponse,ex,'Failed to get drone type'));
+                .json(generateErrorResponse(exceptionOccurredResponse,ex,'Failed to get drone'));
         }
     }
 
@@ -81,10 +81,10 @@ export default class DroneController {
 
             drone = await this._droneService.create(drone);
             return response.status(successPostResponse.httpStatus)
-                .json(generateResponse(successPostResponse,drone,'Drone type created successfully'));
+                .json(generateResponse(successPostResponse,drone,'Drone created successfully'));
         } catch(ex){
             return response.status(failedPostResponse.httpStatus)
-                .json(generateErrorResponse(failedPostResponse,ex,'Failed to create drone type'));
+                .json(generateErrorResponse(failedPostResponse,ex,'Failed to create drone'));
         }
     }
 
@@ -97,12 +97,12 @@ export default class DroneController {
             drone.weight_limit = getDroneWeightLimit(drone.model);
             drone = await this._droneService.update({_id},drone);
             if(drone)  return response.status(successPostResponse.httpStatus)
-                            .json(generateResponse(successPostResponse,drone,'Drone type update successfully'));
+                            .json(generateResponse(successPostResponse,drone,'Drone update successfully'));
             else      return response.status(failedPostResponse.httpStatus)
-                            .json(generateErrorResponse(failedPostResponse,{},'Failed to update drone type'));                   
+                            .json(generateErrorResponse(failedPostResponse,{},'Failed to update drone'));                   
         } catch(ex){ 
             return response.status(failedPostResponse.httpStatus)
-                .json(generateErrorResponse(failedPostResponse,ex,'Failed to update drone type'));
+                .json(generateErrorResponse(failedPostResponse,ex,'Failed to update drone'));
         }
     }
 

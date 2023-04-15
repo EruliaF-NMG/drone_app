@@ -26,7 +26,7 @@ export default class CheckStatusController {
                 .json(generateResponse(successGetResponse,dispatch));
         } catch(ex){
             return response.status(exceptionOccurredResponse.httpStatus)
-                .json(generateErrorResponse(exceptionOccurredResponse,ex,'Failed get dispatch data'));
+                .json(generateErrorResponse(exceptionOccurredResponse,ex,'Failed get medication items'));
         }
     }
 
@@ -38,7 +38,7 @@ export default class CheckStatusController {
                 .json(generateResponse(successGetResponse,dispatch));
         } catch(ex){
             return response.status(exceptionOccurredResponse.httpStatus)
-                .json(generateErrorResponse(exceptionOccurredResponse,ex,'Failed get dispatch data'));
+                .json(generateErrorResponse(exceptionOccurredResponse,ex,'Failed get free drones'));
         }
     }
 
