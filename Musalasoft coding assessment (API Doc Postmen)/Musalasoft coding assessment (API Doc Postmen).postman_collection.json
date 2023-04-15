@@ -1,0 +1,398 @@
+{
+	"info": {
+		"_postman_id": "c52723b5-138c-4bcb-b0b6-340831d2c8e1",
+		"name": "Musalasoft coding assessment (API Doc Postmen)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "manage-drones",
+			"item": [
+				{
+					"name": "add-drones",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"serial_number\" :\"9hhrt\",\n    \"model\":\"Middleweight\",\n    \"battery_capacity\":99,\n    \"state\":\"IDLE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/drones",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"drones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-drones",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/drones",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"drones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-drones-with-free-space",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/drones/with-free-space",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"drones",
+								"with-free-space"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-drone-by-id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/drones/64383834c98b7e5bb7b3cbe8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"drones",
+								"64383834c98b7e5bb7b3cbe8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-drone-by-id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"serial_number\" :\"123456789015\",\n    \"model\":\"Middleweight\",\n    \"battery_capacity\":40,\n    \"state\":\"IDLE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/drones/64383834c98b7e5bb7b3cbe8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"drones",
+								"64383834c98b7e5bb7b3cbe8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "medications",
+			"item": [
+				{
+					"name": "get-medications-by-id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/medications/643a2edcc40160223b928b13",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"medications",
+								"643a2edcc40160223b928b13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add-medications",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "GGGTU",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "weight",
+									"value": "100",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "code",
+									"value": "GGGTU",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "medication_image",
+									"type": "file",
+									"src": []
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/medications",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"medications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit-medications",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "testpendoal",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "weight",
+									"value": "10",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "code",
+									"value": "GGTR",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "medication_image",
+									"type": "file",
+									"src": "/Users/nisalmadusanka/Downloads/2021-Nissan-Rogue-Sport-Orange-728x400.jpg"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/medications/6438ecbfac2caae7b3e4385e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"medications",
+								"6438ecbfac2caae7b3e4385e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-medications",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/medications",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"medications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-image-by-id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/medications/get-image-by-id/6438ecbfac2caae7b3e4385e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"medications",
+								"get-image-by-id",
+								"6438ecbfac2caae7b3e4385e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "dispatch",
+			"item": [
+				{
+					"name": "get-dispatch",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/dispatch",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"dispatch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add-dispatch",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"drone_reference\" :\"64383834c98b7e5bb7b3cbe8\",\n    \"medication_reference\":\"64392caaf775c8852386c54e\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/dispatch",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"dispatch"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Check Status",
+			"item": [
+				{
+					"name": "medication-items-by-drone",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/check/medication-items-by-drone/64383834c98b7e5bb7b3cbe8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"check",
+								"medication-items-by-drone",
+								"64383834c98b7e5bb7b3cbe8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
